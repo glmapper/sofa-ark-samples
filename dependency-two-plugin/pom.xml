@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sofa-ark-samples</artifactId>
+        <groupId>com.glmapper.bridge.boot</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>dependency-two-plugin</artifactId>
+
+    <dependencies>
+        <dependency>
+            <artifactId>dependency-two</artifactId>
+            <groupId>com.glmapper.bridge.boot</groupId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-ark-plugin-maven-plugin</artifactId>
+                <version>0.6.0</version>
+                <executions>
+                    <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>ark-plugin</goal>
+                        </goals>
+
+                        <configuration>
+                            <exported>
+                                <packages>
+                                    <package>com.glmapper.bridge.boot.two.*</package>
+                                </packages>
+                            </exported>
+
+                            <!--不将 spring 的包打进去-->
+                            <excludeGroupIds>
+                                <excludeGroupId>org.springframework</excludeGroupId>
+                                <excludeGroupId>org.springframework.boot</excludeGroupId>
+                                <excludeGroupId>org.apache.tomcat.embed</excludeGroupId>
+                            </excludeGroupIds>
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
